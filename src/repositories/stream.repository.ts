@@ -1,4 +1,4 @@
-import { DynamoDBHelper } from "../helpers/dynamo.helper";
+import { DynamoDBHelper } from "../utils/dynamo.util";
 import { LIVE_STATUS, STREAM_SK } from "../constants/dynamodb";
 
 export class StreamRepository {

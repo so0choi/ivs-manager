@@ -1,6 +1,6 @@
-import { IvschatHelper } from "../helpers/ivschat.helper";
-import { ERRORS } from "../helpers/errors.helper";
-import { utils } from "../utils";
+import { IvschatHelper } from "../utils/ivschat.helper";
+import { ERRORS } from "../utils/errors.helper";
+import { generalUtils } from "../utils/general.utils";
 
 export class ChatService {
   async creatChatRoom(streamId: string) {
@@ -27,7 +27,7 @@ export class ChatService {
 
   async createChatToken(chatArn: string, username: string) {
     try {
-      const uuid = utils.uuidv4();
+      const uuid = generalUtils.uuidv4();
       const userId = `${username}.${uuid}`;
       const attributes = {
         username,

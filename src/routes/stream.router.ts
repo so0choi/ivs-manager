@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { utils } from "../utils";
+import { generalUtils } from "../utils/general.utils";
 import { createStreamSchema } from "../schemas/Stream";
 import * as controllers from "../controllers";
 
@@ -19,7 +19,7 @@ async function streamRouter(fastify: FastifyInstance) {
       config: {
         description: "Create a new stream",
       },
-      preValidation: utils.preValidation(createStreamSchema),
+      preValidation: generalUtils.preValidation(createStreamSchema),
     },
     controllers.createStream,
   );

@@ -1,6 +1,6 @@
-import { IVSHelper } from "../helpers/ivs.helper";
-import { utils } from "../utils";
-import { ERRORS } from "../helpers/errors.helper";
+import { IVSHelper } from "../utils/ivs.helper";
+import { generalUtils } from "../utils/general.utils";
+import { ERRORS } from "../utils/errors.helper";
 import { StreamRepository } from "../repositories/stream.repository";
 
 export class StreamService {
@@ -22,7 +22,7 @@ export class StreamService {
 
   async endStream(streamId: string) {
     try {
-      const channelArn = utils.createChannelArn(streamId);
+      const channelArn = generalUtils.createChannelArn(streamId);
       await IVSHelper.stopStream(channelArn);
     } catch (e) {
       if (e.$metadata?.httpStatusCode) {
@@ -41,7 +41,7 @@ export class StreamService {
 
   async deleteStream(streamId: string) {
     try {
-      const channelArn = utils.createChannelArn(streamId);
+      const channelArn = generalUtils.createChannelArn(streamId);
       await IVSHelper.deleteChannel(channelArn);
     } catch (e) {
       // AWS SDK 에러 처리

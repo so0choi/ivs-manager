@@ -7,10 +7,10 @@ import {
 } from "../schemas/Stream";
 import { STANDARD } from "../constants/request";
 import { StreamService } from "../services/stream.service";
-import { ERRORS, handleServerError } from "../helpers/errors.helper";
+import { ERRORS, handleServerError } from "../utils/errors.helper";
 import { ChatService } from "../services/chat.service";
 import { StreamRepository } from "../repositories/stream.repository";
-import { utils } from "../utils";
+import { generalUtils } from "../utils/general.utils";
 import pino from "pino";
 
 const streamService = new StreamService();
@@ -24,7 +24,7 @@ export const createStream = async (
   try {
     const { channel, streamKey } = await streamService.createStream(title);
 
-    streamId = utils.extractChannelId(channel.arn);
+    streamId = generalUtils.extractChannelId(channel.arn);
 
     const chat = await chatService.creatChatRoom(streamId);
 
@@ -41,7 +41,7 @@ export const createStream = async (
         streamId,
         streamKey: streamKey.value,
         playbackUrl: channel.playbackUrl,
-        rtmpUrl: utils.createRtmpURl(channel.ingestEndpoint),
+        rtmpUrl: generalUtils.createRtmpURl(channel.ingestEndpoint),
       },
       chat,
     });
